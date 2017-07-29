@@ -9,7 +9,7 @@ file "${ASM}" | grep -q 'assembler source text' || {
   exit 1
 }
 
-THIS="$0"
+THIS=`basename "$0"`
 printRenamingScript() {
   echo "#!/bin/sh"
   echo "exec sed -i.before.${THIS}.bak -r '"

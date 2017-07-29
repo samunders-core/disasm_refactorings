@@ -39,7 +39,7 @@ DS=3
 CODE_RELOC_ADDRESS=`relocBaseAddress "${EXE}" "${CS}"`
 DATA_RELOC_ADDRESS=`relocBaseAddress "${EXE}" "${DS}"`
 
-THIS="$0"
+THIS=`basename "$0"`
 printRenamingScript() {
   echo "#!/bin/sh"
   echo "exec sed -i.before.${THIS}.bak -r '"
