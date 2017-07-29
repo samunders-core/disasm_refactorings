@@ -20,7 +20,7 @@ file "$1" | grep -q 'assembler source text' && {
   ASM="$1"
 }
 file "${ASM}" | grep -q 'assembler source text' || {
-  echo "Neither of given files is assembler source text" 1>&2
+  echo "Neither of given files is assembler source text produced by https://github.com/samunders-core/le_disasm" 1>&2
   exit 3
 }
 
@@ -41,7 +41,7 @@ DATA_RELOC_ADDRESS=`relocBaseAddress "${EXE}" "${DS}"`
 
 printRenamingScript() {
   echo "#!/bin/sh"
-  echo "exec sed -i -r '"
+  echo "exec sed -i.bak -r '"
   debugInfo | tr ':\r' '  ' | awk '
     /Name/{name=$2}
     /address\s+=\s+000'${CS}'\s+/{address=sprintf("$(('$CODE_RELOC_ADDRESS' + 0x%s))", $4);type="func"}
