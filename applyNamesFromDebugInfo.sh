@@ -39,9 +39,10 @@ DS=3
 CODE_RELOC_ADDRESS=`relocBaseAddress "${EXE}" "${CS}"`
 DATA_RELOC_ADDRESS=`relocBaseAddress "${EXE}" "${DS}"`
 
+THIS="$0"
 printRenamingScript() {
   echo "#!/bin/sh"
-  echo "exec sed -i.bak -r '"
+  echo "exec sed -i.before.${THIS}.bak -r '"
   debugInfo | tr ':\r' '  ' | awk '
     /Name/{name=$2}
     /address\s+=\s+000'${CS}'\s+/{address=sprintf("$(('$CODE_RELOC_ADDRESS' + 0x%s))", $4);type="func"}
